@@ -1,23 +1,21 @@
-# Python Sol with dfs
-
-def dfs(prev, index, numbers, target):
-    if index >= len(numbers):
-        if prev == target :
-            return 1
-        return 0
-    ans = 0
-    cur1 = prev + numbers[index]
-    cur2 = prev - numbers[index]
-
-    ans += dfs(cur1, index+1, numbers, target)
-    ans += dfs(cur2, index+1, numbers, target)
-    return ans
+# Python Sol with bfs
+from collections import deque
 
 def solution(numbers, target):
     answer = 0
-    current = numbers[0];
+    queue = deque()
     
-    answer += dfs(current, 1, numbers, target)
-    answer += dfs(-current, 1, numbers, target)
+    queue.append((numbers[0], 0))
+    queue.append((-numbers[0], 0))
+    
+    while queue :
+        p = queue.popleft()
+        if p[1] == len(numbers) -1 :
+            if p[0] == target :
+                answer += 1
+            continue
+            
+        queue.append((p[0] + numbers[p[1]+1], p[1]+1))
+        queue.append((p[0] - numbers[p[1]+1], p[1]+1))
     
     return answer
