@@ -12,11 +12,11 @@ def solution(n,a,b):
         if 2**i >= b :
             expB = i
             break
-    print(expA, expB)
+    
     if expA == expB :
-        num = 2**(expA-1)
+        num = 2**(expA-1) # 다음단계로
         print(num)
-        solution(n,a,b)
+        return solution(n-num,a-num,b-num)
     else : 
         return expB
     
